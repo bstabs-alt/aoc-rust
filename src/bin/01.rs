@@ -50,13 +50,11 @@ fn parse_calc(input: &str) -> TopElf {
 
 pub fn part_one(input: &str) -> Option<u32> {
     let top_elf = parse_calc(input);
-    println!("{}", top_elf.one);
     Some(top_elf.one)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
     let mut top_elves: TopElf = parse_calc(input);
-    println!("{}", top_elves.sum());
     Some(top_elves.sum())
 }
 
