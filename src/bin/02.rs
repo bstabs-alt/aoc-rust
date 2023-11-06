@@ -1,9 +1,39 @@
+#[derive(Default, Debug)]
+struct Hand {
+    x: bool,
+    y: bool,
+    z: bool,
+}
+
+fn assign_points(mut hands: Vec<String>, mut score: u32) -> u32 {
+    
+    match hands.last().to_string(){
+        "x" => score += 1,
+        "y" => score += 2,
+        "z" => score += 3,
+    }
+    return score
+}
+
+
+fn tournament(rounds: &str) -> Option<u32> {
+    // let my_hand: Hand = Hand::default();
+    let mut score: u32 = 0;
+    for round in rounds.lines() {
+        let hands: Vec<String> =  round.split(" ").map(|f| f.to_string()).collect();
+        score += assign_points(hands, score);
+    }
+    Some(score)
+} 
+
 pub fn part_one(input: &str) -> Option<u32> {
-    None
+    let score = tournament(input);
+    score
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let score = tournament(input);
+    score
 }
 
 advent_of_code::main!(2);
