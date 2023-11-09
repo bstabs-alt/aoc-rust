@@ -1,16 +1,21 @@
-#[derive(Default, Debug)]
-struct Hand {
-    x: bool,
-    y: bool,
-    z: bool,
-}
+// #[derive(Debug)]
+// enum Hand {
+//     X = 1,
+//     Y = 2,
+//     Z = 3,
+// }
 
-fn assign_points(mut hands: Vec<String>, mut score: u32) -> u32 {
-    
-    match hands.last().to_string(){
-        "x" => score += 1,
-        "y" => score += 2,
-        "z" => score += 3,
+
+fn assign_points(hands: Vec<String>, mut score: u32) -> u32 {
+    // match and assign pointsr for hand
+    match hands.last() {
+       Some(hand)  => match hand.as_str() {
+        "X" => score += 1,
+        "Y" => score += 2,
+        "Z" => score += 3,
+        _ => {}
+       },
+       None => {},
     }
     return score
 }
@@ -18,11 +23,18 @@ fn assign_points(mut hands: Vec<String>, mut score: u32) -> u32 {
 
 fn tournament(rounds: &str) -> Option<u32> {
     // let my_hand: Hand = Hand::default();
+
+    // sum of my points 
     let mut score: u32 = 0;
+
+    // each game of paper scissors rock
     for round in rounds.lines() {
+        // split opponent's and my hand
         let hands: Vec<String> =  round.split(" ").map(|f| f.to_string()).collect();
+        // add to score
         score += assign_points(hands, score);
     }
+    //return score
     Some(score)
 } 
 
